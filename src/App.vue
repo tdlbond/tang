@@ -1,10 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
-import TestJsx from './components/TestJsx.jsx';
+import TestJsx from './components/TestJsx.jsx'
+
+const name = ref('123123')
 </script>
 
 <template>
   <TestJsx />
+  <p>{{ name }}</p>
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
