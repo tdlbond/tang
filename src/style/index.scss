@@ -1,0 +1,10 @@
+@import './common.scss';
+
+/* .color-primary {
+  color: red;
+} */
+.form-wrapper {
+  & .form-item {
+    width: 100px;
+  }
+}
