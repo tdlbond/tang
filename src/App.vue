@@ -2,11 +2,13 @@
 import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TestJsx from './components/TestJsx.jsx'
+import SelfGraphic from '@/components/SelfGraphic.vue'
 
 const name = ref('123123')
 </script>
 
 <template>
+  <SelfGraphic />
   <TestJsx />
   <p class="color-primary">{{ name }}</p>
   <div>
