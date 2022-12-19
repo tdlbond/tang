@@ -179,8 +179,8 @@ const lineClass = (axis, type) => {
 const graphics = ref([])
 const calcGraphic = () => {
   graphics.value = []
-  const coordiantex = [0, ...yAxis.value, WIDTH]
-  const coordiantey = [0, ...xAxis.value, HEIGHT]
+  const coordiantex = [0, ...yAxis.value, WIDTH].sort((a, b) => a - b)
+  const coordiantey = [0, ...xAxis.value, HEIGHT].sort((a, b) => a - b)
   if (coordiantex.length == 2 && coordiantey.length == 2) {
     return
   }
