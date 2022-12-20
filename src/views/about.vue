@@ -3,10 +3,5 @@
 </template>
 
 <script setup></script>
-<script>
-export default {
-  name: 'ViewAbout'
-}
-</script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped></style>

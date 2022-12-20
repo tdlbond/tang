@@ -21,13 +21,8 @@ import SelfGraphic from '@/components/SelfGraphic.vue'
 
 const name = ref('123123')
 </script>
-<script>
-export default {
-  name: 'ViewHome'
-}
-</script>
 
-<style scoped>
+<style lang="scss" scoped>
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -38,5 +33,8 @@ export default {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.color-primary {
+  background-color: $bg-color-primary;
 }
 </style>
