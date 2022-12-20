@@ -17,6 +17,11 @@ const routes = [
     component: () => import('@/views/canvas.vue')
   },
   {
+    name: 'selfGraphic',
+    path: '/selfGraphic',
+    component: () => import('@/views/selfGraphic.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/home'
   }
