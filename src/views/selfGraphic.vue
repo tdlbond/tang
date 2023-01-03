@@ -54,7 +54,7 @@
       <div v-if="ysubline.visible" class="ysubline" :style="{ top: ysubline.top + 'px' }"></div>
     </div>
     <div>
-      <el-tag v-for="(item, index) of graphics" :key="index" class="ml-2" type="success" @mouseenter="handleMouseenter(item)" @mouseleave="handleMouseleave">{{
+      <el-tag v-for="(item, index) of graphics" :key="index" class="ml-2" type="info" @mouseenter="handleMouseenter(item)" @mouseleave="handleMouseleave">{{
         `${index + 1}: ${THICK}*${item.with}*${item.height}`
       }}</el-tag>
     </div>
