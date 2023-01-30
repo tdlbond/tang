@@ -12,7 +12,9 @@ const state = reactive({
 
 const { data } = toRefs(state)
 
-const changeData = () => {}
+const changeData = () => {
+  window.open('http://localhost:30012/')
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -22,6 +22,11 @@ const routes = [
     component: () => import('@/views/selfGraphic.vue')
   },
   {
+    name: 'driver',
+    path: '/driver',
+    component: () => import('@/views/driver.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/home'
   }
