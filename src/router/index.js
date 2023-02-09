@@ -12,9 +12,9 @@ const routes = [
     component: () => import('@/views/about.vue')
   },
   {
-    name: 'canvas',
-    path: '/canvas',
-    component: () => import('@/views/canvas.vue')
+    name: 'portal',
+    path: '/portal',
+    component: () => import('@/views/portal.vue')
   },
   {
     name: 'selfGraphic',
