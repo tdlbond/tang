@@ -149,7 +149,7 @@ onMounted(() => {
 .home-main {
   .div {
     position: fixed;
-    transition: all 0.3s;
+    transition: all 0.3s ease-out;
     .hide {
       display: flex;
       justify-content: center;
