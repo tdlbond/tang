@@ -1,25 +1,45 @@
 module.exports = {
-  root: true,
   env: {
     browser: true,
-    es2021: true,
-    node: true
+    es2021: true
   },
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
-  overrides: [],
+  extends: [
+    'standard-with-typescript',
+    'plugin:vue/vue3-recommended',
+    'plugin:prettier/recommended',
+    '.eslintrc-auto-import.json'
+  ],
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
-    },
-    requireConfigFile: false
+    extraFileExtensions: ['.vue'],
+    project: ['./tsconfig.json']
   },
   plugins: ['vue'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'vite.config.ts',
+    'commitlint.config.js',
+    'index.html'
+  ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    eqeqeq: 'off',
+    'no-unused-vars': 'warn'
   }
 }

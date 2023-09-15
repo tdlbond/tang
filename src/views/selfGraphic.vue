@@ -1,10 +1,21 @@
 <template>
-  <div class="cutting-graphic" :style="{ width: graphicWrapperWidth + 'px' }">
+  <div
+    class="cutting-graphic"
+    :style="{ width: graphicWrapperWidth + 'px' }"
+  >
     <div class="lines-tag">
       <div>
         <p>纵向切割线：</p>
         <div class="tags">
-          <el-tag v-for="(tag, index) in dynamicTags" :key="index" closable :disable-transitions="false" @close="handleClose(tag, 1)"> {{ tag }}mm </el-tag>
+          <el-tag
+            v-for="(tag, index) in dynamicTags"
+            :key="index"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag, 1)"
+          >
+            {{ tag }}mm
+          </el-tag>
           <el-input
             v-if="inputVisible"
             ref="inputRef"
@@ -14,14 +25,29 @@
             @keyup.enter="handleInputConfirm(1)"
             @blur="handleInputConfirm(1)"
             @focus="handleInputFocus(1)"
-            @input="(e) => handleInputChange(e, 1)"
+            @input="(e: string) => handleInputChange(e, 1)"
           />
-          <el-button v-else class="button-new-tag" size="small" @click="showInput(1)"> + 添加 </el-button>
+          <el-button
+            v-else
+            class="button-new-tag"
+            size="small"
+            @click="showInput(1)"
+          >
+            + 添加
+          </el-button>
         </div>
       </div>
       <div>
         <p>横向切割线：</p>
-        <el-tag v-for="(tag, index) in dynamicTags2" :key="index" closable :disable-transitions="false" @close="handleClose(tag, 2)"> {{ tag }}mm </el-tag>
+        <el-tag
+          v-for="(tag, index) in dynamicTags2"
+          :key="index"
+          closable
+          :disable-transitions="false"
+          @close="handleClose(tag, 2)"
+        >
+          {{ tag }}mm
+        </el-tag>
         <el-input
           v-if="inputVisible2"
           ref="inputRef2"
@@ -31,12 +57,22 @@
           @keyup.enter="handleInputConfirm(2)"
           @blur="handleInputConfirm(2)"
           @focus="handleInputFocus(2)"
-          @input="(e) => handleInputChange(e, 2)"
+          @input="(e: string) => handleInputChange(e, 2)"
         />
-        <el-button v-else class="button-new-tag" size="small" @click="showInput(2)"> + 添加 </el-button>
+        <el-button
+          v-else
+          class="button-new-tag"
+          size="small"
+          @click="showInput(2)"
+        >
+          + 添加
+        </el-button>
       </div>
     </div>
-    <div class="graphic-wrapper" :style="{ height: graphicWrapperHeight + 'px' }">
+    <div
+      class="graphic-wrapper"
+      :style="{ height: graphicWrapperHeight + 'px' }"
+    >
       <div>
         <!-- <div class="graphic" :style="{ width: graphicStyle.width + 'px', height: graphicStyle.height + 'px' }"> -->
         <div
@@ -49,8 +85,18 @@
           :graphicWidth="width + 'mm'"
           :graphicHeight="height + 'mm'"
         >
-          <div v-for="item in xAxis" :key="item" class="line-y" :style="{ left: item + 'px' }"></div>
-          <div v-for="(item, index) in yAxis" :key="index" class="line-x" :style="{ top: item + 'px' }"></div>
+          <div
+            v-for="item in xAxis"
+            :key="item"
+            class="line-y"
+            :style="{ left: item + 'px' }"
+          />
+          <div
+            v-for="(item, index) in yAxis"
+            :key="index"
+            class="line-x"
+            :style="{ top: item + 'px' }"
+          />
           <div
             v-if="selectGraphic.with"
             class="graphic-select"
@@ -60,18 +106,24 @@
               width: selectGraphic.with + 'px',
               height: selectGraphic.height + 'px'
             }"
-          ></div>
-          <div v-if="xsubline.visible" class="xsubline" :style="{ left: xsubline.left + 'px' }"></div>
-          <div v-if="ysubline.visible" class="ysubline" :style="{ top: ysubline.top + 'px' }"></div>
+          />
+          <div
+            v-if="xsubline.visible"
+            class="xsubline"
+            :style="{ left: xsubline.left + 'px' }"
+          />
+          <div
+            v-if="ysubline.visible"
+            class="ysubline"
+            :style="{ top: ysubline.top + 'px' }"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, nextTick, watch, inject, computed } from 'vue'
-
+<script lang="ts" setup>
 const props = defineProps({
   width: {
     type: Number,
@@ -89,8 +141,6 @@ const props = defineProps({
 
 const emit = defineEmits(['change'])
 
-const $message = inject('$message')
-
 const graphicWrapperWidth = ref(600)
 const graphicWrapperHeight = ref(600)
 
@@ -102,14 +152,14 @@ const graphicScale = ref(1)
 const oppositeScale = computed(() => 1 / graphicScale.value)
 
 const inputValue = ref('')
-const dynamicTags = ref([])
+const dynamicTags = ref<any[]>([])
 const inputVisible = ref(false)
-const inputRef = ref(null)
+const inputRef = ref()
 
 const inputValue2 = ref('')
-const dynamicTags2 = ref([])
+const dynamicTags2 = ref<any[]>([])
 const inputVisible2 = ref(false)
-const inputRef2 = ref(null)
+const inputRef2 = ref()
 
 const xsubline = reactive({
   visible: false,
@@ -121,7 +171,7 @@ const ysubline = reactive({
   top: 50
 })
 
-const handleClose = (tag, type) => {
+const handleClose = (tag: string, type: number): void => {
   if (type == 1) {
     dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1)
     xAxis.value.splice(xAxis.value.indexOf(tag), 1)
@@ -132,26 +182,29 @@ const handleClose = (tag, type) => {
   calcGraphic()
 }
 
-const showInput = (type) => {
+const showInput = async (type: any): Promise<void> => {
   if (type == 1) {
     inputVisible.value = true
-    nextTick(() => {
-      inputRef.value.focus()
-    })
+    await nextTick()
+    inputRef.value.focus()
   } else {
     inputVisible2.value = true
-    nextTick(() => {
-      inputRef2.value.focus()
-    })
+    await nextTick()
+    inputRef2.value.focus()
   }
 }
 
-const handleInputConfirm = (type) => {
+const handleInputConfirm = (type: any): void => {
   if (type == 1) {
     if (dynamicTags.value.includes(inputValue.value)) {
-      $message.warning('该位置已存在切割线')
+      // $message.warning('该位置已存在切割线')
     }
-    if (inputValue.value && inputValue.value > 0 && inputValue.value < props.width && !dynamicTags.value.includes(inputValue.value)) {
+    if (
+      inputValue.value.length > 0 &&
+      +inputValue.value > 0 &&
+      +inputValue.value < props.width &&
+      !dynamicTags.value.includes(inputValue.value)
+    ) {
       dynamicTags.value.push(inputValue.value)
       lineClass(dynamicTags.value[dynamicTags.value.length - 1], type)
     }
@@ -162,9 +215,14 @@ const handleInputConfirm = (type) => {
     // xsubline.left = 50
   } else {
     if (dynamicTags2.value.includes(inputValue2.value)) {
-      $message.warning('该位置已存在切割线')
+      // $message.warning('该位置已存在切割线')
     }
-    if (inputValue2.value && inputValue2.value > 0 && inputValue2.value < props.height && !dynamicTags2.value.includes(inputValue2.value)) {
+    if (
+      inputValue2.value !== '' &&
+      +inputValue2.value > 0 &&
+      +inputValue2.value < props.height &&
+      !dynamicTags2.value.includes(inputValue2.value)
+    ) {
       dynamicTags2.value.push(inputValue2.value)
       lineClass(dynamicTags2.value[dynamicTags2.value.length - 1], type)
     }
@@ -177,19 +235,19 @@ const handleInputConfirm = (type) => {
   calcGraphic()
 }
 
-const handleInputFocus = (type) => {
+const handleInputFocus = (type: any): void => {
   if (type == 1) {
-    inputValue.value = Math.floor(props.width / 2)
+    inputValue.value = Math.floor(props.width / 2) + ''
     xsubline.left = Math.floor(props.width / 2)
     xsubline.visible = true
   } else {
-    inputValue2.value = Math.floor(props.height / 2)
+    inputValue2.value = Math.floor(props.height / 2) + ''
     ysubline.top = Math.floor(props.height / 2)
     ysubline.visible = true
   }
 }
 
-const handleInputChange = (val, type) => {
+const handleInputChange = (val: any, type: any): void => {
   if (type == 1) {
     xsubline.left = val
     xsubline.visible = val > 0 && val < props.width
@@ -199,9 +257,9 @@ const handleInputChange = (val, type) => {
   }
 }
 
-const xAxis = ref([])
-const yAxis = ref([])
-const lineClass = (axis, type) => {
+const xAxis = ref<any[]>([])
+const yAxis = ref<any[]>([])
+const lineClass = (axis: any, type: any): void => {
   if (type == 1) {
     if (xAxis.value.includes(axis)) {
       return
@@ -215,13 +273,14 @@ const lineClass = (axis, type) => {
   }
 }
 
-const graphics = ref([])
-const calcGraphic = () => {
+const graphics = ref<any[]>([])
+const calcGraphic = (): void => {
   graphics.value = []
   const coordiantex = [0, ...xAxis.value, props.width].sort((a, b) => a - b)
   const coordiantey = [0, ...yAxis.value, props.height].sort((a, b) => a - b)
   if (coordiantex.length == 2 && coordiantey.length == 2) {
-    return emit('change', graphics.value, xAxis.value, yAxis.value)
+    emit('change', graphics.value, xAxis.value, yAxis.value)
+    return
   }
   coordiantey.forEach((item, index) => {
     coordiantex.forEach((item2, index2) => {
@@ -249,10 +308,10 @@ const selectGraphic = reactive({
   with: '',
   height: ''
 })
-const mouseenter = (val) => {
+const mouseenter = (val: any): void => {
   Object.assign(selectGraphic, val)
 }
-const mouseleave = () => {
+const mouseleave = (): void => {
   selectGraphic.coordinate1 = []
   selectGraphic.coordinate2 = []
   selectGraphic.coordinate3 = []
@@ -264,19 +323,19 @@ const mouseleave = () => {
 watch(
   () => [props.width, props.height],
   ([width, height]) => {
-    if (width && height) {
+    if (width !== 0 && height !== 0) {
       const maxWidth = graphicWrapperWidth.value - 100
       const maxHeight = graphicWrapperHeight.value - 100
-      graphicStyle.width = width
-      graphicStyle.height = height
+      graphicStyle.width = width + ''
+      graphicStyle.height = height + ''
       if (width > maxWidth || height > maxHeight) {
         if (width / height > maxWidth / maxHeight) {
-          graphicStyle.width = maxWidth
-          graphicStyle.height = Math.round(maxWidth * (height / width))
+          graphicStyle.width = maxWidth + ''
+          graphicStyle.height = Math.round(maxWidth * (height / width)) + ''
           graphicScale.value = maxWidth / width
         } else {
-          graphicStyle.height = maxHeight
-          graphicStyle.width = Math.round(maxHeight * (width / height))
+          graphicStyle.height = maxHeight + ''
+          graphicStyle.width = Math.round(maxHeight * (width / height)) + ''
           graphicScale.value = maxHeight / height
         }
       }
@@ -296,42 +355,52 @@ defineExpose({
 .cutting-graphic {
   border: 1px solid #ebebeb;
   border-radius: 3px;
+
   .lines-tag {
     padding: 10px 15px;
     border-bottom: 1px solid #ebebeb;
+
     .el-tag {
       margin: 0 5px 5px 0;
     }
+
     .el-input {
       width: 100px;
       margin-bottom: 5px;
     }
+
     > div {
       display: flex;
       align-items: baseline;
+
       > p {
         white-space: nowrap;
       }
+
       .tags {
         display: flex;
         flex-flow: wrap;
+
         .el-button--small {
           margin-bottom: 5px;
         }
       }
     }
   }
+
   .graphic-wrapper {
     width: 100%;
     background-color: #fafafa;
     display: flex;
     justify-content: center;
     align-items: center;
+
     .graphic {
       border: calc(v-bind(oppositeScale) * 4px) solid #070707;
       background-color: #fff;
       box-sizing: content-box;
       position: relative;
+
       .line-y {
         width: 1px;
         height: 100%;
@@ -340,6 +409,7 @@ defineExpose({
         top: 0;
         bottom: 0;
       }
+
       .line-x {
         width: 100%;
         height: 1px;
@@ -348,29 +418,45 @@ defineExpose({
         left: 0;
         right: 0;
       }
+
       .graphic-select {
         position: absolute;
         background-color: #c4d6fc;
         border: 2px solid #5978bd;
       }
+
       .xsubline {
         position: absolute;
         top: 0;
         bottom: 0;
         width: 1px;
         height: 100%;
-        background: linear-gradient(to bottom, #333, #333 5px, transparent 5px, transparent);
+        background: linear-gradient(
+          to bottom,
+          #333,
+          #333 5px,
+          transparent 5px,
+          transparent
+        );
         background-size: 100% 10px;
       }
+
       .ysubline {
         position: absolute;
         left: 0;
         right: 0;
         width: 100%;
         height: 1px;
-        background: linear-gradient(to right, #333, #333 5px, transparent 5px, transparent);
+        background: linear-gradient(
+          to right,
+          #333,
+          #333 5px,
+          transparent 5px,
+          transparent
+        );
         background-size: 10px 100%;
       }
+
       &::before {
         content: attr(graphicHeight);
         position: absolute;
@@ -381,6 +467,7 @@ defineExpose({
         white-space: nowrap;
         writing-mode: vertical-lr;
       }
+
       &::after {
         content: attr(graphicWidth);
         position: absolute;
