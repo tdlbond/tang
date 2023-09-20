@@ -38,7 +38,7 @@ module.exports = {
         ignore: ['after-comment', 'first-nested']
       }
     ],
-    'at-rule-no-unknown': [
+    'scss/at-rule-no-unknown': [
       true,
       {
         ignoreAtRules: [

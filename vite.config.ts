@@ -2,13 +2,15 @@ import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { resolve } from 'path'
-import postcssPresetEnv from 'postcss-preset-env'
+// import postcssPresetEnv from 'postcss-preset-env'
 import viteCompression from 'vite-plugin-compression'
 import legacy from '@vitejs/plugin-legacy'
 import { visualizer } from 'rollup-plugin-visualizer'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// import autoprefixer from 'autoprefixer'
+// import tailwindcss from 'tailwindcss'
 
 const pathSrc = resolve(__dirname, 'src')
 const lifecycle = process.env.npm_lifecycle_event
@@ -60,9 +62,9 @@ export default defineConfig({
     }
   },
   css: {
-    postcss: {
-      plugins: [postcssPresetEnv]
-    },
+    // postcss: {
+    //   plugins: [tailwindcss, autoprefixer]
+    // },
     preprocessorOptions: {
       scss: {
         additionalData: `@import '@/styles/variables.scss';`

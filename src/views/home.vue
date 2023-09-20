@@ -1,28 +1,30 @@
 <template>
-  <p class="color-primary">{{ name }}</p>
   <div>
-    <a
-      href="https://vitejs.dev"
-      target="_blank"
-    >
-      <img
-        src="@/assets/vite.svg"
-        class="logo"
-        alt="Vite logo"
-      />
-    </a>
-    <a
-      href="https://vuejs.org/"
-      target="_blank"
-    >
-      <img
-        src="@/assets/vue.svg"
-        class="logo vue"
-        alt="Vue logo"
-      />
-    </a>
+    <p class="color-primary text-3xl font-bold underline">{{ name }}</p>
+    <div>
+      <a
+        href="https://vitejs.dev"
+        target="_blank"
+      >
+        <img
+          src="@/assets/vite.svg"
+          class="logo"
+          alt="Vite logo"
+        />
+      </a>
+      <a
+        href="https://vuejs.org/"
+        target="_blank"
+      >
+        <img
+          src="@/assets/vue.svg"
+          class="logo vue"
+          alt="Vue logo"
+        />
+      </a>
+    </div>
+    <HelloWorld msg="Vite + Vue" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <script lang="ts" setup>

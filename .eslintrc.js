@@ -29,12 +29,7 @@ module.exports = {
     project: ['./tsconfig.json']
   },
   plugins: ['vue'],
-  ignorePatterns: [
-    '.eslintrc.js',
-    'vite.config.ts',
-    'commitlint.config.js',
-    'index.html'
-  ],
+  ignorePatterns: ['*.js', '*.ts', 'index.html'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
