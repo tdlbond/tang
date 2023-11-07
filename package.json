@@ -17,6 +17,7 @@
     "axios": "^1.5.0",
     "driver.js": "^0.9.8",
     "element-plus": "^2.3.12",
+    "normalize.css": "^8.0.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },

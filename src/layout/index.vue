@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <section><Navbar /></section>
-    <div>
-      <section><Siderbar /></section>
-      <section><AppMain /></section>
+  <div class="layout h-full flex flex-col">
+    <section class="h-20 flex justify-center items-center">
+      <Navbar />
+    </section>
+    <div class="flex-1 flex">
+      <section class="w-50"><Siderbar /></section>
+      <section class="flex-1"><AppMain /></section>
     </div>
   </div>
 </template>
