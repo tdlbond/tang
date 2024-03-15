@@ -20,7 +20,7 @@ module.exports = {
       }
     }
   ],
-  parser: 'vue-eslint-parser',
+  // parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
@@ -36,6 +36,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     eqeqeq: 'off',
     'no-unused-vars': 'warn',
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off'
   }
 }

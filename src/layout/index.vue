@@ -5,7 +5,7 @@
     </section>
     <div class="flex-1 flex">
       <section class="w-50"><Siderbar /></section>
-      <section class="flex-1"><AppMain /></section>
+      <section class="flex-1 overflow-y-auto"><AppMain /></section>
     </div>
   </div>
 </template>

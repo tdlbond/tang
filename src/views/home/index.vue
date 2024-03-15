@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p class="color-primary text-3xl font-bold underline">{{ name }}</p>
+    <p class="color-primary text-3xl font-bold underline">
+      {{ name }}
+    </p>
+    <p>{{ title }}</p>
     <div>
       <a
         href="https://vitejs.dev"
@@ -28,7 +31,36 @@
 </template>
 
 <script lang="ts" setup>
+import { titleKey } from '@/constant/keys'
+
 const name = ref('123123')
+
+const calcStrPos = (str1: string, str2: string, pos: number = 0): number => {
+  let i = pos
+  let j = 0
+  const len1 = str1.length
+  const len2 = str2.length
+  const str1Arr = [...str1]
+  const str2Arr = [...str2]
+  while (i < len1 && j < len2) {
+    if (str1Arr[i] === str2Arr[j]) {
+      i++
+      j++
+    } else {
+      i = i - j + 1
+      j = 0
+    }
+  }
+  if (j >= len2) {
+    return i - j
+  } else {
+    return -1
+  }
+}
+
+console.log(calcStrPos('hello world', 'wor'))
+
+const title = inject(titleKey)
 </script>
 
 <style lang="scss" scoped>
