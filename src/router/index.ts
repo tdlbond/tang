@@ -58,6 +58,7 @@ export const asyncRoutes = [
       title: 'portal',
       icon: ''
     },
+    hidden: true,
     children: [
       {
         name: 'Portal',

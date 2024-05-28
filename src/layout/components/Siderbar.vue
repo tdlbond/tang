@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="h-full">
     <el-menu
-      :default-active="path"
+      class="h-full overflow-auto"
+      :default-active="defaultActive"
       router
     >
       <Siderbaritem
@@ -20,13 +21,13 @@ import Siderbaritem from './SiderbarItem.vue'
 
 const { routes } = storeToRefs(useMenu())
 
-const { path } = useRoute()
+const route = useRoute()
+
+const defaultActive = computed(() => route.path)
 
 const avaliableRoutes = computed(() => {
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  return routes.value.filter((item: any) => !item.hidden)
+  return routes.value.filter((item: any) => item?.hidden != true)
 })
 </script>
 
 <style lang="scss"></style>
-@/store/menu

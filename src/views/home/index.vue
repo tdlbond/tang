@@ -27,10 +27,15 @@
       </a>
     </div>
     <HelloWorld msg="Vite + Vue" />
+    <div id="music"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import Player from 'xgplayer'
+import Music from 'xgplayer-music'
+import 'xgplayer/dist/index.min.css'
+import 'xgplayer-music/dist/index.min.css'
 import { titleKey } from '@/constant/keys'
 
 const name = ref('123123')
@@ -61,6 +66,28 @@ const calcStrPos = (str1: string, str2: string, pos: number = 0): number => {
 console.log(calcStrPos('hello world', 'wor'))
 
 const title = inject(titleKey)
+
+onMounted(() => {
+  const player = new Player({
+    id: 'music',
+    url: '/koushixinfei.mp3', // [{ src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3', name: '林宥嘉·脆弱一分钟', poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg' }],
+    volume: 0.8,
+    width: window.innerWidth,
+    height: 50,
+    mediaType: 'audio',
+    presets: ['default', Music],
+    ignores: ['playbackrate'],
+    controls: {
+      initShow: true,
+      mode: 'flex'
+    },
+    marginControls: true,
+    videoConfig: {
+      crossOrigin: 'anonymous'
+    }
+  })
+  player.crossOrigin = 'anonymous'
+})
 </script>
 
 <style lang="scss" scoped>

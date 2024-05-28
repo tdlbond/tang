@@ -1,11 +1,13 @@
 <template>
   <div class="layout h-full flex flex-col">
-    <section class="h-20 flex justify-center items-center">
+    <section
+      class="h-20 min-h-20 flex justify-center items-center border-b border-slate-300"
+    >
       <Navbar />
     </section>
-    <div class="flex-1 flex">
+    <div class="grow flex overflow-auto">
       <section class="w-50"><Siderbar /></section>
-      <section class="flex-1 overflow-y-auto"><AppMain /></section>
+      <section class="grow overflow-auto"><AppMain /></section>
     </div>
   </div>
 </template>
