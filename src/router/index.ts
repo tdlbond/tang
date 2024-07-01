@@ -1,6 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type Router } from 'vue-router'
 import Layout from '@/layout/index.vue'
 import { useMenu } from '@/store/menu'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+NProgress.configure({
+  showSpinner: false
+})
 
 export const constantRoutes = [
   {
@@ -9,15 +15,17 @@ export const constantRoutes = [
     redirect: '/home',
     meta: {
       title: '首页',
-      icon: ''
+      icon: 'icon-shouye',
+      auth: false
     },
     children: [
       {
         name: 'Home',
         path: '/home',
-        component: async () => await import('@/views/home/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         meta: {
-          title: 'home'
+          title: 'home',
+          auth: true
         }
       }
     ]
@@ -26,11 +34,36 @@ export const constantRoutes = [
     path: '/404',
     name: '404',
     hidden: true,
-    component: async () => await import('@/views/error/404.vue')
+    component: () => import('@/views/error/404.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'pathMatch',
+    hidden: true,
+    redirect: '/404'
   }
 ]
 
 export const asyncRoutes = [
+  {
+    path: '/maptalks',
+    component: Layout,
+    redirect: '/maptalks/index',
+    meta: {
+      title: 'maptalks',
+      icon: 'icon-ditu'
+    },
+    children: [
+      {
+        name: 'Maptalks',
+        path: '/maptalks/index',
+        component: () => import('@/views/maptalks/index.vue'),
+        meta: {
+          title: 'maptalks'
+        }
+      }
+    ]
+  },
   {
     path: '/about',
     component: Layout,
@@ -43,9 +76,17 @@ export const asyncRoutes = [
       {
         name: 'About',
         path: '/about/index',
-        component: async () => await import('@/views/about/index.vue'),
+        component: () => import('@/views/about/index.vue'),
         meta: {
           title: 'about'
+        }
+      },
+      {
+        name: 'AboutDetail',
+        path: '/about/detail',
+        component: () => import('@/views/about/detail.vue'),
+        meta: {
+          title: 'aboutDetail'
         }
       }
     ]
@@ -63,7 +104,7 @@ export const asyncRoutes = [
       {
         name: 'Portal',
         path: '/portal/index',
-        component: async () => await import('@/views/portal/index.vue'),
+        component: () => import('@/views/portal/index.vue'),
         meta: {
           title: 'portal'
         }
@@ -82,7 +123,7 @@ export const asyncRoutes = [
       {
         name: 'SelfGraphic',
         path: '/selfGraphic/index',
-        component: async () => await import('@/views/selfGraphic/index.vue'),
+        component: () => import('@/views/selfGraphic/index.vue'),
         meta: {
           title: 'selfGraphic'
         }
@@ -101,7 +142,7 @@ export const asyncRoutes = [
       {
         name: 'Driver',
         path: '/driver/index',
-        component: async () => await import('@/views/driver/index.vue'),
+        component: () => import('@/views/driver/index.vue'),
         meta: {
           title: 'driver'
         }
@@ -120,7 +161,7 @@ export const asyncRoutes = [
       {
         name: 'Gsap',
         path: '/gsap/index',
-        component: async () => await import('@/views/gsap/index.vue'),
+        component: () => import('@/views/gsap/index.vue'),
         meta: {
           title: 'gsap'
         }
@@ -129,23 +170,45 @@ export const asyncRoutes = [
   }
 ]
 
-const router = createRouter({
+const router: Router = createRouter({
   history: createWebHistory(),
-  routes: constantRoutes
+  routes: constantRoutes,
+  scrollBehavior: (_to, _from, savedPosition) => {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {
+        top: 0,
+        behavior: 'smooth'
+      }
+    }
+  },
+  sensitive: true,
+  strict: true
 })
 
-router.beforeEach(async (to, _from, next) => {
+router.beforeEach(async (to, _from) => {
+  NProgress.start()
   const store = useMenu()
+  console.log(router.getRoutes())
+  console.log('to.meta.auth', to.meta.auth)
   if (!store.routes.length) {
     const routes: [] = (await store.handleRoutes()) as []
     routes.forEach((item: any) => {
       router.addRoute(item)
     })
-    // console.log(router.getRoutes(), to)
-    next({ ...to, replace: true })
+    if (to.name === '404' && to.redirectedFrom) {
+      return { path: to.redirectedFrom.fullPath }
+    } else {
+      return true
+    }
   } else {
-    next()
+    return true
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router

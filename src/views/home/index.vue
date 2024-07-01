@@ -28,6 +28,9 @@
     </div>
     <HelloWorld msg="Vite + Vue" />
     <div id="music"></div>
+    <article @click="router.push({ name: 'Maptalks' })">
+      <span>title</span>
+    </article>
   </div>
 </template>
 
@@ -72,7 +75,7 @@ onMounted(() => {
     id: 'music',
     url: '/koushixinfei.mp3', // [{ src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3', name: '林宥嘉·脆弱一分钟', poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg' }],
     volume: 0.8,
-    width: window.innerWidth,
+    width: 300,
     height: 50,
     mediaType: 'audio',
     presets: ['default', Music],
@@ -88,6 +91,8 @@ onMounted(() => {
   })
   player.crossOrigin = 'anonymous'
 })
+
+const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,11 @@
     :index="item.path"
   >
     <template #title>
-      <!-- <el-icon><location /></el-icon> -->
+      <FontIcon
+        v-if="item.meta.icon"
+        class="icon"
+        :type="item.meta.icon"
+      />
       <span>{{ item.meta.title }}</span>
     </template>
     <SiderbarItem
@@ -15,8 +19,16 @@
   </el-sub-menu>
   <el-menu-item
     v-else
-    :index="item.children[0].path"
-    >{{ item.children[0].meta.title }}</el-menu-item
+    :index="item.children ? item.children[0].path : item.path"
+  >
+    <FontIcon
+      v-if="item.meta.icon"
+      class="icon"
+      :type="item.meta.icon"
+    />
+    <span>{{
+      item.children ? item.children[0].meta.title : item.meta.title
+    }}</span></el-menu-item
   >
 </template>
 
@@ -25,7 +37,7 @@
 
 defineProps({
   item: {
-    type: Object,
+    type: Object as any,
     default: () => {}
   }
 })
@@ -33,4 +45,8 @@ defineProps({
 // const hasOneShowingChild = () => {}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.icon {
+  margin-right: 5px;
+}
+</style>

@@ -15,20 +15,24 @@
     "deploy": "node deploy.ts"
   },
   "dependencies": {
-    "axios": "^1.5.0",
+    "axios": "^1.7.2",
     "driver.js": "^0.9.8",
     "element-plus": "^2.3.12",
     "gsap": "^3.12.2",
+    "maptalks": "^1.0.0-rc.33",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
-    "vue": "^3.4.21",
-    "vue-router": "^4.2.4",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3",
     "xgplayer": "^3.0.17",
     "xgplayer-music": "^3.0.17"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@types/nprogress": "^0.2.3",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-legacy": "^4.1.1",
